@@ -1,6 +1,6 @@
 import 'package:ai_bot/ai_bot/constants/app_colors.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 
 class MessageWidget extends StatelessWidget {
   final String text;
@@ -32,10 +32,17 @@ class MessageWidget extends StatelessWidget {
               horizontal: 20,
             ),
             margin: const EdgeInsets.only(bottom: 8),
-            child: MarkdownBody(
-              selectable: true,
-              data: text,
-            ),
+            child: isFromUser
+                ? Text(
+                    text,
+                  )
+                : AnimatedTextKit(
+                    totalRepeatCount: 1,
+                    animatedTexts: [
+                      TyperAnimatedText(text,
+                          speed: const Duration(milliseconds: 14)),
+                    ],
+                  ),
           ),
         ),
       ],

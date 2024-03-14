@@ -16,7 +16,10 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
-    GeminiCubit.get(context).startFunction();
+    try {
+      GeminiCubit.get(context).startFunction();
+      GeminiCubit.get(context).checkMic();
+    } catch (e) {}
     super.initState();
   }
 
@@ -43,7 +46,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   color: AppColors.kWhiteColor,
                 )),
             title: Text(
-              'Chat wit AI bot',
+              'Chat with AI bot',
               style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.bold,
@@ -51,7 +54,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           body: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(16.sp),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,8 +62,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 Expanded(
                     child: ListView.builder(
                   controller: cubit.scrollController,
-                  itemBuilder: (context, idx) {
-                    final content = cubit.chat.history.toList()[idx];
+                  itemBuilder: (context, index) {
+                    final content = cubit.chat.history.toList()[index];
                     final text = content.parts
                         .whereType<TextPart>()
                         .map<String>((e) => e.text)
@@ -113,19 +116,46 @@ class _ChatScreenState extends State<ChatScreen> {
                       const SizedBox.square(
                         dimension: 15,
                       ),
-                      if (!cubit.loading)
-                        IconButton(
-                          onPressed: () async {
-                            cubit.sendChatMessage(
-                                cubit.textEditingController.text);
-                          },
-                          icon: const Icon(
-                            Icons.send,
-                            color: AppColors.kPrimaryColor,
-                          ),
-                        )
-                      else
-                        const CircularProgressIndicator(),
+                      cubit.loading == false
+                          ? Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    cubit.isListing
+                                        ? cubit.stopListening()
+                                        : cubit.startRecording();
+                                    cubit.textEditingController.text =
+                                        cubit.recognizedText;
+                                    setState(() {});
+                                  },
+                                  child: CircleAvatar(
+                                    radius: 20.sp,
+                                    backgroundColor: AppColors.kbackgroundColor,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(2.sp),
+                                      child: Icon(
+                                        cubit.isListing
+                                            ? Icons.stop
+                                            : Icons.mic,
+                                        size: 25.sp,
+                                        color: AppColors.kSecondaryColor,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () async {
+                                    cubit.sendChatMessage(
+                                        cubit.textEditingController.text);
+                                  },
+                                  icon: const Icon(
+                                    Icons.send,
+                                    color: AppColors.kPrimaryColor,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : const CircularProgressIndicator(),
                     ],
                   ),
                 ),

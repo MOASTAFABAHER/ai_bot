@@ -7,19 +7,12 @@ class CustomAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CircleAvatar(
-          radius: 20.sp,
-          backgroundImage: const AssetImage('assets/images/robot.png'),
-        ),
-        SizedBox(
-          width: 80.w,
-        ),
         Text(
           'Home Page',
           style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
         ),
-       
       ],
     );
   }

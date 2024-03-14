@@ -1,6 +1,5 @@
 import 'package:ai_bot/ai_bot/views/screen/splash_scnree.dart';
 import 'package:ai_bot/bloc/gemini/gemini_cubit.dart';
-import 'package:ai_bot/bloc/voice/voice_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +18,6 @@ class AppRoot extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => GeminiCubit()),
-            BlocProvider(create: (context) => VoiceCubit()),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
