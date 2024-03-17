@@ -14,7 +14,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 import 'package:open_file/open_file.dart';
@@ -261,8 +260,7 @@ class _ImageConvertScreenState extends State<ImageConvertScreen>
                                     ),
                                     GestureDetector(
                                       onTap: () async {
-                                        File pdfFile =
-                                            await createPDF(scannedText);
+                                        await createPDF(scannedText);
                                         await _openPdf();
                                       },
                                       child: scannedText.isNotEmpty
@@ -284,11 +282,11 @@ class _ImageConvertScreenState extends State<ImageConvertScreen>
                                     function: () {
                                       GeminiCubit.get(context)
                                           .textEditingController
-                                          .text = scannedText;
+                                          .text = 'summarize this text $scannedText';
                                       AppNavigator.appNavigator(
                                           context, const ChatScreen());
                                     },
-                                    text: 'Go To chat with this text',
+                                    text: 'Summarize text',
                                   )
                                 : const SizedBox(),
                           ],

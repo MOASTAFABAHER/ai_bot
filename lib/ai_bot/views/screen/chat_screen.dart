@@ -18,7 +18,6 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     try {
       GeminiCubit.get(context).startFunction();
-      GeminiCubit.get(context).checkMic();
     } catch (e) {}
     super.initState();
   }
@@ -27,7 +26,6 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<GeminiCubit, GeminiState>(
       listener: (context, state) {
-        // TODO: implement listener
       },
       builder: (context, state) {
         var cubit = GeminiCubit.get(context);

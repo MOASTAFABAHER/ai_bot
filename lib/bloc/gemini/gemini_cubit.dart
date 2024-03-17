@@ -64,7 +64,6 @@ class GeminiCubit extends Cubit<GeminiState> {
         model: 'gemini-pro', apiKey: 'AIzaSyCVvF-5qDywQQ3c4Mfi-LjFGwMZwaA6_1g');
     chat = model.startChat();
   }
-
   Future<void> sendChatMessage(String message) async {
     loading = true;
     log('Emit loading');

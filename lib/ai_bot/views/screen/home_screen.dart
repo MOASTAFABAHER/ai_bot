@@ -13,6 +13,17 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(elevation: 0,
+        backgroundColor: AppColors.kPrimaryColor,
+        onPressed: () {
+          AppNavigator.appNavigator(context, const ChatScreen());
+        },
+        child: CircleAvatar(
+          backgroundColor: Colors.transparent,
+          radius: 30.sp,
+          child: Image.asset('assets/images/robot2.png'),
+        ),
+      ),
       backgroundColor: AppColors.kbackgroundColor,
       body: SafeArea(
         child: Padding(
@@ -55,16 +66,6 @@ class HomeScreen extends StatelessWidget {
                         fuunction: () {
                           AppNavigator.appNavigator(
                               context, const ImageConvertScreen());
-                        }),
-                    SizedBox(height: 20.h),
-                    AssistantComponent(
-                        containerCollor: AppColors.kPrimaryColor,
-                        buttonText: 'Text',
-                        buttonImage: 'assets/images/chat.png',
-                        buttontextCollor: AppColors.kBlackColor,
-                        fuunction: () {
-                          AppNavigator.appNavigator(
-                              context, const ChatScreen());
                         }),
                   ],
                 ),
