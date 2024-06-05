@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 30.h,
             ),
             Text(
-              'App Name',
+              'My robot',
               style: TextStyle(
                   fontSize: 18.sp,
                   color: AppColors.kWhiteColor,
