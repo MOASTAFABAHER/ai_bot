@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:ai_bot/ai_bot/constants/keys.dart';
 import 'package:ai_bot/config/toast_config.dart';
 import 'package:ai_bot/enums/toast_status.dart';
 import 'package:bloc/bloc.dart';
@@ -61,7 +62,7 @@ class GeminiCubit extends Cubit<GeminiState> {
   static GeminiCubit get(context) => BlocProvider.of(context);
   void startFunction() {
     model = GenerativeModel(
-        model: 'gemini-pro', apiKey: 'AIzaSyCVvF-5qDywQQ3c4Mfi-LjFGwMZwaA6_1g');
+        model: 'gemini-pro', apiKey: Keys.apiKey);
     chat = model.startChat();
   }
   Future<void> sendChatMessage(String message) async {
